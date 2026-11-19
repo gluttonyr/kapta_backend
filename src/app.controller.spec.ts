@@ -15,6 +15,9 @@ describe('AppController', () => {
   });
 
   it('reports the API status', () => {
-    expect(appController.getStatus()).toEqual({ name: 'Kapta API', status: 'ok' });
+    expect(appController.getStatus()).toEqual({
+      name: 'Kapta API',
+      status: 'ok',
+    });
   });
 });
