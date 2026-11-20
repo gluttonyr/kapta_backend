@@ -22,6 +22,8 @@ FROM node:24-alpine AS runtime
 WORKDIR /app
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+# Super admin panel (static files served at /admin)
+COPY public ./public
 COPY package.json ./
 
 EXPOSE 3000

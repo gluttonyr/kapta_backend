@@ -57,6 +57,21 @@ describe('Kapta license server (e2e)', () => {
   it('reports the API status', () =>
     http().get('/').expect(200, { name: 'Kapta API', status: 'ok' }));
 
+  it('serves the admin panel with a strict content policy', async () => {
+    await http().get('/console').expect(301).expect('Location', '/console/');
+    const page = await http().get('/console/').expect(200);
+    expect(page.text).toContain('<script src="admin.js"></script>');
+    expect(page.headers['content-security-policy']).toContain(
+      "default-src 'self'",
+    );
+    expect(page.headers['x-frame-options']).toBe('DENY');
+    await http()
+      .get('/console/admin.js')
+      .expect(200)
+      .expect('Content-Type', /javascript/);
+    await http().get('/console/missing.js').expect(404);
+  });
+
   it('signs the super admin in, only with the right password', async () => {
     await http()
       .post('/auth/admin/login')

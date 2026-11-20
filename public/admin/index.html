@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Kapta Admin</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true"><rect x="6" y="6" width="88" height="88" rx="26" fill="#166534"/><g fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M36 28V72"/><path d="M62 30L42 52L64 72"/></g><circle cx="72" cy="30" r="8" fill="#0EA5E9"/></svg>
+      <span>Kapta <small>Admin</small></span>
+    </div>
+    <div class="who" id="who" hidden>
+      <span id="who-email"></span>
+      <button type="button" class="ghost" id="logout">Se déconnecter</button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- Sign-in -->
+    <section id="login-view" class="center" hidden>
+      <form id="login-form" class="card narrow">
+        <h1>Connexion super admin</h1>
+        <label>E-mail <input name="email" type="email" autocomplete="username" required></label>
+        <label>Mot de passe <input name="password" type="password" autocomplete="current-password" required></label>
+        <p class="error" id="login-error" hidden></p>
+        <button type="submit" class="primary">Se connecter</button>
+      </form>
+    </section>
+
+    <!-- Clients and the selected client -->
+    <section id="main-view" class="layout" hidden>
+      <aside class="card sidebar">
+        <h2>Clients</h2>
+        <ul id="client-list" class="list"></ul>
+        <form id="client-form" class="stack">
+          <h3>Nouveau client</h3>
+          <label>Nom <input name="name" required minlength="2" maxlength="100" placeholder="JM Services"></label>
+          <label>URL du backend <input name="backendUrl" type="url" required placeholder="https://api.client.com"></label>
+          <p class="error" id="client-error" hidden></p>
+          <button type="submit" class="primary">Créer le client</button>
+        </form>
+      </aside>
+
+      <div id="detail" class="detail">
+        <div class="card empty" id="no-client">Choisissez un client ou créez-en un.</div>
+        <div id="client-detail" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script src="admin.js"></script>
+</body>
+</html>

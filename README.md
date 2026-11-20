@@ -11,6 +11,10 @@ npm run test:e2e       # uses a throwaway database "kapta_test", recreated on ea
 
 The super admin is created at the first start from `SUPER_ADMIN_EMAIL` / `SUPER_ADMIN_PASSWORD` (10 characters minimum); an existing one is never changed.
 
+## Super admin console
+
+Open **`/console/`** in a browser (e.g. `http://localhost:3001/console/`) and sign in with the super admin account: clients, their accounts, activation codes and phones. It is a static page (`public/admin/`, no external code, strict Content-Security-Policy) calling the API below on the same origin; the session lasts as long as the browser tab. Generated codes are shown once, in the page, right after generation.
+
 ## API
 
 Every protected route takes `Authorization: Bearer <accessToken>`. Unknown body fields are refused (400).
